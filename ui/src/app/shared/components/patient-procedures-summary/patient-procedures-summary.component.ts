@@ -30,7 +30,7 @@ export class PatientProceduresSummaryComponent implements OnInit {
   formValuesData: any = {};
   procedures$: Observable<any>;
   fields: string =
-    "custom:(uuid,encounters:(uuid,location:(uuid,display),encounterType,display,encounterProviders,encounterDatetime,voided,obs,orders:(uuid,display,orderer,orderType,dateActivated,dateStopped,autoExpireDate,orderNumber,concept,display)))";
+    "custom:(uuid,encounters:(uuid,location:(uuid,display),encounterType,display,encounterProviders,encounterDatetime,voided,obs,orders:(uuid,display,orderer,orderType,dateActivated,dateStopped,autoExpireDate,orderNumber,concept,display,voided)))";
   creatingProceduresResponse$: Observable<any>;
   addingProcedure: boolean = false;
   hasError: boolean = false;
@@ -52,10 +52,10 @@ export class PatientProceduresSummaryComponent implements OnInit {
       this.patientVisit.uuid,
       this.fields
     );
-    this.procedures$.subscribe((item)=>{
-      console.log("procedures ------------------------------>",item)
-    })
-    
+    this.procedures$.subscribe((item) => {
+      console.log("procedures ------------------------------>", item);
+    });
+
     this.observationsKeyedByConcepts$ = this.store.select(
       getGroupedObservationByConcept
     );
