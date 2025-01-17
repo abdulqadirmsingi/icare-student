@@ -15,6 +15,7 @@ export function getOrdersFromCurrentVisitEncounters(
       ...orders,
       ..._.map(
         encounter?.orders?.filter(
+          //Filtering out voided orders
           (order) =>
             !order.voided &&
             (order?.orderType?.display?.toLowerCase() === "procedure order" ||
@@ -27,15 +28,15 @@ export function getOrdersFromCurrentVisitEncounters(
               : !isEnsured && bills && bills?.length === 0
               ? true
               : // : isEnsured && bills && bills?.length === 0
-              isEnsured
-              ? true
+              isEnsured ? true
               : (
                   bills?.filter(
                     (bill) =>
                       (
                         bill?.items?.filter(
                           (billItem) =>
-                            billItem?.billItem?.item?.concept?.uuid ===
+                            billItem?.billItem?.item?.concept?.uuid
+                            ===
                             order?.concept?.uuid
                         ) || []
                       )?.length > 0
@@ -83,7 +84,8 @@ export function getOrdersFromCurrentVisitEncounters(
   return (
     orders.filter(
       (order) =>
-        order?.orderType?.toLowerCase()?.indexOf(type.toLowerCase()) > -1
+        order?.orderType?.toLowerCase()?.
+      indexOf(type.toLowerCase()) > -1
     ) || []
   );
 }
