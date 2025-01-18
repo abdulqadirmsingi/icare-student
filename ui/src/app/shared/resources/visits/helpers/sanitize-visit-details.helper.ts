@@ -17,7 +17,8 @@ export function getOrdersFromCurrentVisitEncounters(
         encounter?.orders?.filter(
           //Filtering out voided orders
           (order) =>
-            !order.voided &&
+            !order.voided
+           &&
             (order?.orderType?.display?.toLowerCase() === "procedure order" ||
               order?.orderType?.display?.toLowerCase() === "radiology order")
         ) || [],
